@@ -1,20 +1,25 @@
 /* See LICENSE file for copyright and license details. */
 
+#define MAX_CONFIG_LENGTH 255
+
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
-static unsigned int gappx     = 6;        /* gaps between windows */
+static unsigned int gappx     = 10;        /* gaps between windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
-static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
-static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#005577";
-static char selbgcolor[]            = "#005577";
+static char term[MAX_CONFIG_LENGTH]				= "st";
+
+static char font[MAX_CONFIG_LENGTH]				= "monospace:size=10";
+static char dmenufont[MAX_CONFIG_LENGTH]	= "monospace:size=10";
+static const char *fonts[]						= { font };
+static char normbgcolor[]						= "#222222";
+static char normbordercolor[]					= "#444444";
+static char normfgcolor[]						= "#bbbbbb";
+static char selfgcolor[]						= "#eeeeee";
+static char selbordercolor[]					= "#005577";
+static char selbgcolor[]						= "#005577";
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -61,7 +66,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { term , NULL };
 
 /*
  * Xresources preferences to load at startup
@@ -73,6 +78,9 @@ ResourcePref resources[] = {
 		{ "selbgcolor",         STRING,  &selbgcolor },
 		{ "selbordercolor",     STRING,  &selbordercolor },
 		{ "selfgcolor",         STRING,  &selfgcolor },
+		{ "font",				STRING,  &font },
+		{ "term",				STRING,  &term },
+		{ "dmenufont",			STRING,  &dmenufont },
 		{ "borderpx",          	INTEGER, &borderpx },
 		{ "snap",          		INTEGER, &snap },
 		{ "showbar",          	INTEGER, &showbar },
